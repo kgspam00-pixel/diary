@@ -1,95 +1,137 @@
-let current = 0;
-const pages = document.querySelectorAll(".page");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>A Few Pages for You</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-/* ===== PAGE NAV ===== */
-function showPage(index) {
-  pages.forEach(p => p.classList.remove("active"));
-  pages[index].classList.add("active");
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
-  const backBtn = pages[index].querySelector(".back");
-  if (backBtn) backBtn.disabled = index === 0;
-}
+  <link rel="stylesheet" href="style.css" />
+</head>
 
-function nextPage() {
-  if (current < pages.length - 1) {
-    current++;
-    showPage(current);
-  }
-}
+<body>
 
-function prevPage() {
-  if (current > 0) {
-    current--;
-    showPage(current);
-  }
-}
+<main id="book">
 
-showPage(current);
+  <!-- COVER -->
+  <section class="page active">
+    <p class="small">A few pages I wanted to leave with you.</p>
+    <p class="signature">— Khushi</p>
+    <div class="nav">
+      <button class="back" onclick="prevPage()">Back</button>
+      <button onclick="nextPage()">Open</button>
+    </div>
+  </section>
 
-/* ===== DATE + TIME ===== */
-const now = new Date();
-const date = now.toLocaleDateString(undefined, { day: "numeric", month: "long" });
-const time = now.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+  <!-- DATE + TIME -->
+  <section class="page">
+    <p class="date" id="dateText"></p>
+    <p id="timeText"></p>
+    <div class="nav">
+      <button class="back" onclick="prevPage()">Back</button>
+      <button onclick="nextPage()">Turn the page</button>
+    </div>
+  </section>
 
-document.getElementById("dateText").innerText = `${date} · ${time}`;
+  <!-- REASONS INTRO -->
+  <section class="page">
+    <p class="section-title">Some reasons why I love you</p>
+    <p class="section-sub">
+      Not in any particular order.<br>
+      Just the ones that come to mind.
+    </p>
+    <div class="nav">
+      <button class="back" onclick="prevPage()">Back</button>
+      <button onclick="nextPage()">Begin</button>
+    </div>
+  </section>
 
-/* ===== TIME MESSAGE ===== */
-const hour = now.getHours();
-let message = "";
+  <!-- REASONS -->
+  <section class="page">
+    <p>You always reply.<br>Even when you’re busy.</p>
+    <div class="nav">
+      <button class="back" onclick="prevPage()">Back</button>
+      <button onclick="nextPage()">Next</button>
+    </div>
+  </section>
 
-if (hour < 12) {
-  message = "Good morning. I hope you woke up feeling calm and cared for.";
-} else if (hour < 17) {
-  message = "I hope your day has been kind to you. And if it wasn’t, I hope this helps a little.";
-} else if (hour < 21) {
-  message = "Evenings make me think of you more than I admit.";
-} else {
-  message = "If you’re reading this late at night, I hope you’re finally resting now.";
-}
+  <section class="page">
+    <p>You stay calm when things get heated.<br>That is so rare.</p>
+    <div class="nav">
+      <button class="back" onclick="prevPage()">Back</button>
+      <button onclick="nextPage()">Next</button>
+    </div>
+  </section>
 
-document.getElementById("timeText").innerText = message;
+  <section class="page">
+    <p>You make the noise disappear.<br>That makes me feel safe.</p>
+    <div class="nav">
+      <button class="back" onclick="prevPage()">Back</button>
+      <button onclick="nextPage()">Next</button>
+    </div>
+  </section>
 
-/* ===== FLOATING HEARTS ===== */
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerText = Math.random() > 0.5 ? "♡" : "♥";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.animationDuration = 6 + Math.random() * 6 + "s";
-  document.body.appendChild(heart);
+  <section class="page">
+    <p>You kiss me like I matter.<br>Even on the phone.</p>
+    <div class="nav">
+      <button class="back" onclick="prevPage()">Back</button>
+      <button onclick="nextPage()">Next</button>
+    </div>
+  </section>
 
-  setTimeout(() => heart.remove(), 12000);
-}
-setInterval(createHeart, 900);
+  <section class="page">
+    <p>You are the smartest man I know.<br>I am so proud of you.</p>
+    <div class="nav">
+      <button class="back" onclick="prevPage()">Back</button>
+      <button onclick="nextPage()">Next</button>
+    </div>
+  </section>
 
-/* ===== VALENTINE LOGIC ===== */
-let triedOnce = false;
+  <section class="page">
+    <p>Loving you is easy.<br>Loving you is natural.</p>
+    <div class="nav">
+      <button class="back" onclick="prevPage()">Back</button>
+      <button onclick="nextPage()">Read slowly</button>
+    </div>
+  </section>
 
-const yesBtn = document.getElementById("yesBtn");
-const noBtn = document.getElementById("noBtn");
+  <!-- MEMORY -->
+  <section class="page memory">
+    <p class="slow">
+      I don’t write things like this lightly.<br><br>
+      I choose you.<br>
+      Again and again.<br><br>
 
-if (yesBtn && noBtn) {
+      Until the poets run out of rhymes.<br>
+      In other words, till the end of time.<br>
+      You'll call me yours, I'll call you mine.<br><br>
 
-  yesBtn.addEventListener("click", () => {
-    nextPage();
-  });
+      So, Mr. Aman Jindal,
+    </p>
+    <div class="nav">
+      <button class="back" onclick="prevPage()">Back</button>
+      <button onclick="nextPage()">One last thing</button>
+    </div>
+  </section>
 
-  noBtn.addEventListener("click", () => {
-    if (!triedOnce) {
-      triedOnce = true;
-      noBtn.innerText = "Try again";
-    }
-  });
+  <!-- VALENTINE -->
+  <section class="page" id="valentine-page">
+    <p class="final">Will you be my Valentine?</p>
+    <div class="choices">
+      <button id="yesBtn">Yes</button>
+      <button id="noBtn" class="soft">No</button>
+    </div>
+  </section>
 
-  function dodge() {
-    if (!triedOnce) return;
+  <!-- END -->
+  <section class="page">
+    <p class="end">I’m really glad it’s you.<br>I LOVE YOU!!</p>
+  </section>
 
-    const x = Math.random() * 140 - 70;
-    const y = Math.random() * 50 - 25;
+</main>
 
-    noBtn.style.transform = `translate(${x}px, ${y}px)`;
-  }
-
-  noBtn.addEventListener("mouseenter", dodge);
-  noBtn.addEventListener("touchstart", dodge);
-}
+<script src="script.js"></script>
+</body>
+</html>
