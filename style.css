@@ -1,13 +1,10 @@
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-/* ===== VINTAGE PAPER BACKGROUND ===== */
+/* VINTAGE PAPER BACKGROUND */
 body {
   margin: 0;
   min-height: 100vh;
   padding: 20px;
-
   background:
     radial-gradient(circle at top, rgba(255,255,255,0.9), rgba(230,220,205,1)),
     repeating-linear-gradient(
@@ -17,7 +14,6 @@ body {
       transparent 1px,
       transparent 4px
     );
-
   font-family: 'Cormorant Garamond', serif;
   display: flex;
   justify-content: center;
@@ -25,7 +21,7 @@ body {
   overflow: hidden;
 }
 
-/* ===== FLOATING VINTAGE HEARTS ===== */
+/* FLOATING HEARTS */
 .heart {
   position: fixed;
   bottom: -30px;
@@ -33,111 +29,62 @@ body {
   opacity: 0.18;
   animation: floatUp linear infinite;
   pointer-events: none;
-  filter: blur(0.3px);
 }
 
 @keyframes floatUp {
-  from {
-    transform: translateY(0) scale(0.9);
-  }
-  to {
-    transform: translateY(-130vh) scale(1.6);
-  }
+  from { transform: translateY(0) scale(0.9); }
+  to { transform: translateY(-130vh) scale(1.6); }
 }
 
-/* ===== BOOK / DIARY ===== */
+/* BOOK */
 #book {
   position: relative;
-  width: 100%;
   max-width: 380px;
+  width: 100%;
   padding: 42px 30px;
-
-  background:
-    linear-gradient(135deg, #fffaf2 0%, #f4ecdf 100%);
-
+  background: linear-gradient(135deg, #fffaf2, #f4ecdf);
   border-radius: 14px;
-
-  box-shadow:
-    0 20px 40px rgba(0,0,0,0.18),
-    inset 0 0 35px rgba(120,90,60,0.1);
-
+  box-shadow: 0 20px 40px rgba(0,0,0,0.18),
+              inset 0 0 35px rgba(120,90,60,0.1);
   text-align: center;
   overflow: hidden;
   z-index: 2;
 }
 
-/* ===== FILM GRAIN / MEMORY FLICKER ===== */
+/* FILM GRAIN */
 #book::after {
   content: "";
   position: absolute;
   inset: 0;
-
-  background:
-    repeating-linear-gradient(
-      90deg,
-      rgba(0,0,0,0.015),
-      rgba(0,0,0,0.015) 1px,
-      transparent 1px,
-      transparent 3px
-    );
-
+  background: rgba(0,0,0,0.03);
   animation: flicker 5.5s infinite;
   pointer-events: none;
 }
 
-/* ===== PAGES ===== */
-.page {
-  display: none;
-  transform-origin: left center;
-  animation: pageTurn 1.4s ease;
+/* PAGES */
+.page { display: none; animation: pageTurn 1.4s ease; }
+.page.active { display: block; }
+
+@keyframes pageTurn {
+  from { opacity: 0; transform: rotateY(-7deg) translateX(-12px); }
+  to { opacity: 1; transform: rotateY(0deg) translateX(0); }
 }
 
-.page.active {
-  display: block;
-}
+/* TEXT */
+p { font-size: 22px; line-height: 1.55; color: #3b2f23; }
+.small { font-size: 18px; }
+.signature { margin-top: 40px; font-style: italic; }
+.section-title { font-size: 24px; }
+.section-sub { font-size: 18px; opacity: 0.8; }
+.date { font-size: 14px; opacity: 0.75; margin-bottom: 18px; font-style: italic; }
 
-/* ===== TEXT STYLES ===== */
-.small {
-  font-size: 18px;
-}
-
-.signature {
-  margin-top: 40px;
-  font-style: italic;
-}
-
-.section-title {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.section-sub {
-  font-size: 18px;
-  opacity: 0.8;
-}
-
-.date {
-  font-size: 14px;
-  opacity: 0.75;
-  margin-bottom: 18px;
-  font-style: italic;
-}
-
-p {
-  font-size: 22px;
-  line-height: 1.55;
-  color: #3b2f23;
-}
-
-/* ===== NAVIGATION ===== */
+/* NAV */
 .nav {
   margin-top: 32px;
   display: flex;
   justify-content: space-between;
-  gap: 12px;
 }
 
-/* ===== BUTTONS ===== */
 button {
   background: none;
   border: 1px solid #5a4634;
@@ -146,23 +93,13 @@ button {
   font-size: 14px;
   cursor: pointer;
   color: #3b2f23;
-  touch-action: manipulation;
 }
 
-button.soft {
-  border-color: #9c8772;
-}
+button.soft { border-color: #9c8772; }
+.back { opacity: 0.6; }
+.back:disabled { opacity: 0.2; cursor: default; }
 
-.back {
-  opacity: 0.6;
-}
-
-.back:disabled {
-  opacity: 0.2;
-  cursor: default;
-}
-
-/* ===== YES / NO POSITIONING (IMPORTANT) ===== */
+/* YES / NO */
 .choices {
   position: relative;
   margin-top: 30px;
@@ -181,52 +118,41 @@ button.soft {
   transform: translateX(20px);
 }
 
-/* ===== MEMORY MODE ===== */
+/* MEMORY */
 .memory {
   background: rgba(240,230,215,0.92);
   padding: 30px;
   border-radius: 10px;
 }
 
-.slow {
-  animation: slowFade 3s ease;
+.final { font-size: 24px; }
+.end { font-size: 22px; }
+
+/* PARTICLES */
+.particle {
+  position: fixed;
+  pointer-events: none;
+  font-size: 16px;
+  animation: pop 1.8s ease-out forwards;
+  z-index: 999;
 }
 
-/* ===== FINAL TEXT ===== */
-.final {
-  font-size: 24px;
-}
-
-.end {
-  font-size: 22px;
-}
-
-/* ===== MOBILE POLISH ===== */
-@media (max-width: 480px) {
-  p {
-    font-size: 20px;
-  }
-
-  .final {
-    font-size: 22px;
-  }
-}
-
-/* ===== ANIMATIONS ===== */
-@keyframes pageTurn {
-  from {
-    opacity: 0;
-    transform: rotateY(-7deg) translateX(-12px);
-  }
+@keyframes pop {
   to {
-    opacity: 1;
-    transform: rotateY(0deg) translateX(0);
+    transform: translate(var(--x), var(--y)) scale(1.4);
+    opacity: 0;
   }
 }
 
-@keyframes slowFade {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.confetti {
+  width: 6px;
+  height: 10px;
+  background: rgba(200,170,140,0.8);
+  animation: confettiFall 2.4s ease-out forwards;
+}
+
+@keyframes confettiFall {
+  to { transform: translateY(120vh) rotate(360deg); opacity: 0; }
 }
 
 @keyframes flicker {
